@@ -1,0 +1,8 @@
+*.out
+main.c
+.vscode
+*.o
+*.a
+*.py
+teste*
+obj
