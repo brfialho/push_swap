@@ -6,11 +6,11 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/18 16:57:13 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/18 17:02:52 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/main.h"
+#include "main.h"
 
 int	main(void)
 {
