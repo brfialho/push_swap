@@ -12,7 +12,94 @@
 
 #include "main.h"
 
-int	main(void)
+int	ft_isnumspace(int c)
 {
-	ft_printf("Hello World\n");
+	return ((c >= '0' && c <= '9') || c == ' ');
 }
+
+int	ft_freesplit(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		ft_free(&split[i++]);
+	free(split);
+	return (0);
+}
+
+int	ft_splitlen(char **split)
+{
+	int	len;
+
+	len = 0;
+	if (!split)
+		return (0);
+	while (split[len])
+		len++;
+	return (len);
+}
+
+int	validate_chars(char *s)
+{
+	while (*s)
+		if (!ft_isnumspace(*s++))
+			return (0);
+	return (1);
+}
+
+void	fill_numbers(int	*numbers, char	**split)
+{
+	int	i;
+	
+	i = -1;
+	while (split[++i])
+		numbers[i] = ft_atoi(split[i]);
+	ft_freesplit(split);
+}
+
+int	*split_input(char *input)
+{
+	char	**split;
+	int 	*numbers;
+
+	if (!validate_chars(input))
+		return (NULL);
+	split = ft_split(input, ' ');
+	if (!split)
+		return (NULL);
+	numbers = ft_calloc(ft_splitlen(split), sizeof(int));
+	if (!numbers)
+		return (ft_freesplit(split), NULL);
+	fill_numbers(numbers, split);
+	return (numbers);
+}
+
+int	*get_input(int argc, char* argv[])
+{
+	if (argc > 2)
+		return (NULL);
+	if (argc == 2)
+		return (split_input(argv[1]));
+	return (NULL);
+}
+
+int	main(int argc, char *argv[])
+{
+	int	*input;
+
+	input = get_input(argc, argv);
+	if (!input)
+		return (write(2, "Error\n", 6));
+	for(int i = 0; i < 4; i++)
+		ft_printf("%d\n", input[i]);
+}
+
+//TO DO 
+
+// STRING 
+// check int max / int min
+// keep track of int array size
+
+// INT
+// implement logic
