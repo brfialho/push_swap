@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/26 19:32:40 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/26 20:07:34 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	validate_chars(char *s)
 long	push_atol(char *s)
 {
 	long	sum;
-	int	sign;
+	int		sign;
 
 	sign = 1;
 	sum = 0;
@@ -45,18 +45,21 @@ long	push_atol(char *s)
 void	append_node(char *input, t_list **head)
 {
 	t_list	*new;
-	long	n;
+	long	*n;
 
-	n = push_atol(input);
-	if (n > INT_MAX || n < INT_MIN)
+	n = ft_calloc(1, sizeof(long));
+	if (!n)
 		error_handler();
-	new = ft_lstnew(&n);
+	*n = push_atol(input);
+	if (*n > INT_MAX || *n < INT_MIN)
+		error_handler();
+	new = ft_lstnew(n);
 	if (!new)
 		error_handler();
 	if (!*head)
 		*head = new;
 	else
-		(*head)->next = new;
+		ft_lstadd_back(head, new);
 }
 void	split_input(char *s, t_list **head)
 {
@@ -95,16 +98,25 @@ t_list	*get_list(int argc, char* argv[])
 	return (list);
 }
 
+#include <stdio.h>
 int	main(int argc, char *argv[])
 {
 	t_list *head;
+	t_list *aux;
 
 	head = get_list(argc, argv);
 	if (!head)
 		error_handler();
 	
-	while (head && ft_printf("%d\n", head->content))
-		(head) = head->next;
+	aux = head;
+	while (aux)
+	{
+		printf("%ld\n", *((long *)aux->content));
+		aux = aux->next;
+	}
+	ft_lstclear(&head, free);
+	(void)argc;
+	(void)argv;
 }
 
 //TO DO 
