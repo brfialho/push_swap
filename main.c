@@ -6,39 +6,11 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/18 17:02:52 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/26 17:31:30 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-
-int	ft_isnumspace(int c)
-{
-	return ((c >= '0' && c <= '9') || c == ' ');
-}
-
-int	ft_freesplit(char **split)
-{
-	int	i;
-
-	i = 0;
-	while (split[i])
-		ft_free(&split[i++]);
-	free(split);
-	return (0);
-}
-
-int	ft_splitlen(char **split)
-{
-	int	len;
-
-	len = 0;
-	if (!split)
-		return (0);
-	while (split[len])
-		len++;
-	return (len);
-}
 
 int	validate_chars(char *s)
 {
@@ -55,7 +27,7 @@ void	fill_numbers(int	*numbers, char	**split)
 	i = -1;
 	while (split[++i])
 		numbers[i] = ft_atoi(split[i]);
-	ft_freesplit(split);
+	ft_split_free(split);
 }
 
 int	*split_input(char *input)
@@ -68,9 +40,9 @@ int	*split_input(char *input)
 	split = ft_split(input, ' ');
 	if (!split)
 		return (NULL);
-	numbers = ft_calloc(ft_splitlen(split), sizeof(int));
+	numbers = ft_calloc(ft_split_len(split), sizeof(int));
 	if (!numbers)
-		return (ft_freesplit(split), NULL);
+		return (ft_split_free(split), NULL);
 	fill_numbers(numbers, split);
 	return (numbers);
 }
@@ -93,6 +65,7 @@ int	main(int argc, char *argv[])
 		return (write(2, "Error\n", 6));
 	for(int i = 0; i < 4; i++)
 		ft_printf("%d\n", input[i]);
+	free(input);
 }
 
 //TO DO 
