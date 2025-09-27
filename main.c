@@ -6,20 +6,18 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/27 18:59:40 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/27 19:49:11 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	error_handler(t_list **head, char **split)
+void	error_handler(t_list **head, t_list *lst, char **split)
 {
 	if (head)
-	{
-		if (*head)
-			lst_del_all(head, free);
 		free(head);
-	}
+	if (lst)
+		lst_del_all(&lst, free);
 	if (split)
 		ft_split_free(split);
 	ft_printf("Error\n");
@@ -81,10 +79,10 @@ void	split_input(char *s, t_list **head)
 	i = 0;
 	split = ft_split(s, ' ');
 	if (!split)
-		error_handler(head, NULL);
+		error_handler(head, *head, NULL);
 	while (split[i])
 		if(!append_node(split[i++], head))
-			error_handler(head, split);
+			error_handler(head, *head, split);
 	ft_split_free(split);
 }
 
@@ -98,7 +96,7 @@ t_list	*get_list(int argc, char* argv[])
 		exit(1);
 	head = ft_calloc(1, sizeof(t_list**));
 	if (!head)
-		error_handler(NULL, NULL);
+		error_handler(NULL, NULL, NULL);
 	i = 1;
 	while (i < argc)
 		split_input(argv[i++], head);
@@ -125,15 +123,32 @@ int	push_cmp_content(void *i, void *j)
 	return (*(long *)i > *(long *)j);
 }
 
+int	is_repeat(t_list **dup)
+{
+	t_list	*tmp;
+
+	tmp = *dup;
+	while (tmp && tmp->next)
+	{
+		if (*(long *)tmp->content == *(long *)tmp->next->content)
+			return (lst_del_all(dup, free), 1);
+		tmp = tmp->next;
+	}
+	return (0);
+
+}
+
 #include <stdio.h>
-void	check_for_repeats(t_list** head)
+void	check_for_repeats(t_list* lst)
 {
 	t_list*	dup;
 
-	dup = lst_dup(*head, push_copy_content, free);
+	dup = lst_dup(lst, push_copy_content, free);
 	lst_bubble_sort(dup, push_cmp_content);
-
+	if (is_repeat(&dup))
+		error_handler(NULL, lst, NULL);
 	lst_del_all(&dup, free);
+
 	// t_list* tmp = dup;
 	// while (tmp && printf ("DUP :%ld\n", *(long *)tmp->content))
 	// 	tmp = tmp->next;
@@ -144,18 +159,18 @@ int	main(int argc, char *argv[])
 	t_list *head;
 
 	head = get_list(argc, argv);
-	check_for_repeats(&head);
-	
+	check_for_repeats(head);
+
 	lst_del_all(&head, free);
 
 	// t_list* tmp = head;
 	// while (tmp && printf ("HEAD: %ld\n", *(long *)tmp->content))
 	// 	tmp = tmp->next;
 	// lst_del_all(&head, free);
-	// (void)argc;
-	// (void)argv;
+	
+// 	(void)argc;
+// 	(void)argv;
 }
 
 //TO DO
-// check repeat
 // refator code to be more readable
