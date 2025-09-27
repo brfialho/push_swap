@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/27 00:25:44 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/27 00:28:52 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,5 @@ int	main(int argc, char *argv[])
 }
 
 //TO DO 
-// read from stdin
 // check repeat
+// refator code to be more readable
