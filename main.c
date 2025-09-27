@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/27 15:19:50 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/27 18:59:40 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	error_handler(t_list **head, char **split)
 	if (head)
 	{
 		if (*head)
-			ft_lstclear(head, free);
+			lst_del_all(head, free);
 		free(head);
 	}
 	if (split)
@@ -64,13 +64,13 @@ int	append_node(char *input, t_list **head)
 	*n = push_atol(input);
 	if (*n > INT_MAX)
 		return (free(n), 0);
-	new = ft_lstnew(n);
+	new = lst_new_node(n);
 	if (!new)
 		return (free(n), 0);
 	if (!*head)
 		*head = new;
 	else
-		ft_lstadd_back(head, new);
+		lst_add_end(head, new);
 	return (1);
 }
 void	split_input(char *s, t_list **head)
@@ -107,26 +107,55 @@ t_list	*get_list(int argc, char* argv[])
 	return (list);
 }
 
+void	*push_copy_content(void	*content)
+{
+	long	*copy;
+
+	if (!content)
+		return (NULL);
+	copy = ft_calloc(1, sizeof(long));
+	if (!copy)
+		return (NULL);
+	*copy = *(long *)content;
+	return (copy);
+}
+
+int	push_cmp_content(void *i, void *j)
+{
+	return (*(long *)i > *(long *)j);
+}
+
 #include <stdio.h>
+void	check_for_repeats(t_list** head)
+{
+	t_list*	dup;
+
+	dup = lst_dup(*head, push_copy_content, free);
+	lst_bubble_sort(dup, push_cmp_content);
+
+	lst_del_all(&dup, free);
+	// t_list* tmp = dup;
+	// while (tmp && printf ("DUP :%ld\n", *(long *)tmp->content))
+	// 	tmp = tmp->next;
+	// lst_del_all(&dup, free);
+}
 int	main(int argc, char *argv[])
 {
 	t_list *head;
-	t_list *aux;
 
 	head = get_list(argc, argv);
-	aux = head;
-	printf("\n");
-	while (aux)
-	{
-		printf("%ld\n", *((long *)aux->content));
-		aux = aux->next;
-	}
-	ft_lstclear(&head, free);
+	check_for_repeats(&head);
 	
-	(void)argc;
-	(void)argv;
+	lst_del_all(&head, free);
+
+	// t_list* tmp = head;
+	// while (tmp && printf ("HEAD: %ld\n", *(long *)tmp->content))
+	// 	tmp = tmp->next;
+	// lst_del_all(&head, free);
+	// (void)argc;
+	// (void)argv;
 }
 
-//TO DO 
+//TO DO
 // check repeat
 // refator code to be more readable
