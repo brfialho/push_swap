@@ -6,23 +6,24 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/26 20:07:34 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/26 22:17:09 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	error_handler(void)
+void	error_handler(t_list **head, char **split)
 {
+	if (head)
+	{
+		if (*head)
+			ft_lstclear(head, free);
+		free(head);
+	}
+	if (split)
+		ft_split_free(split);
 	ft_printf("Error\n");
 	exit(1);
-}
-int	validate_chars(char *s)
-{
-	while (*s)
-		if (!ft_isnumspace(*s++))
-			return (0);
-	return (1);
 }
 
 long	push_atol(char *s)
@@ -32,34 +33,44 @@ long	push_atol(char *s)
 
 	sign = 1;
 	sum = 0;
-	while (*s == ' ' || (*s >= 9 && *s <= 13))
-		s++;
 	if (*s == '+' || *s == '-')
-		if (*s++ == '-')
+	{		
+		if (*s == '-' && s++)
 			sign = -1;
-	while (ft_isdigit(*s))
+		else
+			s++;
+	}
+	while (*s)
+	{
+		if (!ft_isdigit(*s))
+			return ((long)INT_MAX + INT_MAX);
 		sum = sum * 10 + *s++ - '0';
+		if ((sum > (long)INT_MAX + 1 && sign < 0) ||
+			(sum > (long)INT_MAX && sign > 0))
+			return ((long)INT_MAX + INT_MAX);
+	}
 	return (sum * sign);
 }
 
-void	append_node(char *input, t_list **head)
+int	append_node(char *input, t_list **head)
 {
 	t_list	*new;
 	long	*n;
 
 	n = ft_calloc(1, sizeof(long));
 	if (!n)
-		error_handler();
+		return (0);
 	*n = push_atol(input);
-	if (*n > INT_MAX || *n < INT_MIN)
-		error_handler();
+	if (*n > INT_MAX)
+		return (free(n), 0);
 	new = ft_lstnew(n);
 	if (!new)
-		error_handler();
+		return (free(n), 0);
 	if (!*head)
 		*head = new;
 	else
 		ft_lstadd_back(head, new);
+	return (1);
 }
 void	split_input(char *s, t_list **head)
 {
@@ -67,14 +78,12 @@ void	split_input(char *s, t_list **head)
 	char	**split;
 
 	i = 0;
-	
 	split = ft_split(s, ' ');
 	if (!split)
-		error_handler();
-
+		error_handler(head, NULL);
 	while (split[i])
-		append_node(split[i++], head);
-
+		if(!append_node(split[i++], head))
+			error_handler(head, split);
 	ft_split_free(split);
 }
 
@@ -86,11 +95,11 @@ t_list	*get_list(int argc, char* argv[])
 	int		i;
 
 	if (argc < 2)
-		error_handler();
+		error_handler(NULL, NULL);
 	i = 1;
 	head = ft_calloc(1, sizeof(t_list**));
 	if (!head)
-		error_handler();
+		error_handler(NULL, NULL);
 	while (i < argc)
 		split_input(argv[i++], head);
 	list = *head;
@@ -105,9 +114,6 @@ int	main(int argc, char *argv[])
 	t_list *aux;
 
 	head = get_list(argc, argv);
-	if (!head)
-		error_handler();
-	
 	aux = head;
 	while (aux)
 	{
@@ -120,10 +126,5 @@ int	main(int argc, char *argv[])
 }
 
 //TO DO 
-
-// STRING 
-// check int max / int min
-// keep track of int array size
-
-// INT
-// implement logic
+// read from stdin
+// check repeat
