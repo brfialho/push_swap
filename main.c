@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/27 19:49:11 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/29 23:07:30 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	is_repeat(t_list **dup)
 	while (tmp && tmp->next)
 	{
 		if (*(long *)tmp->content == *(long *)tmp->next->content)
-			return (lst_del_all(dup, free), 1);
+			return (lst_del_all(dup, NULL), 1);
 		tmp = tmp->next;
 	}
 	return (0);
@@ -143,16 +143,16 @@ void	check_for_repeats(t_list* lst)
 {
 	t_list*	dup;
 
-	dup = lst_dup(lst, push_copy_content, free);
+	dup = lst_dup(lst, free);
 	lst_bubble_sort(dup, push_cmp_content);
 	if (is_repeat(&dup))
 		error_handler(NULL, lst, NULL);
-	lst_del_all(&dup, free);
+	// lst_del_all(&dup, NULL);
 
-	// t_list* tmp = dup;
-	// while (tmp && printf ("DUP :%ld\n", *(long *)tmp->content))
-	// 	tmp = tmp->next;
-	// lst_del_all(&dup, free);
+	t_list* tmp = dup;
+	while (tmp && printf ("DUP :%ld\n", *(long *)tmp->content))
+		tmp = tmp->next;
+	lst_del_all(&dup, NULL);
 }
 int	main(int argc, char *argv[])
 {
@@ -161,13 +161,13 @@ int	main(int argc, char *argv[])
 	head = get_list(argc, argv);
 	check_for_repeats(head);
 
+	// lst_del_all(&head, free);
+
+	t_list* tmp = head;
+	while (tmp && printf ("HEAD: %ld\n", *(long *)tmp->content))
+		tmp = tmp->next;
 	lst_del_all(&head, free);
 
-	// t_list* tmp = head;
-	// while (tmp && printf ("HEAD: %ld\n", *(long *)tmp->content))
-	// 	tmp = tmp->next;
-	// lst_del_all(&head, free);
-	
 // 	(void)argc;
 // 	(void)argv;
 }
