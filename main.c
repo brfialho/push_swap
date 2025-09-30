@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/30 00:25:19 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/30 00:50:08 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,14 @@ void	*push_copy_content(void	*content)
 	return (copy);
 }
 
-int	push_cmp_content(void *i, void *j)
+int	push_cmp_isgreater(void *i, void *j)
 {
 	return (((t_number *)i)->number > ((t_number *)j)->number);
+}
+
+int	push_cmp_isequal(void *i, void *j)
+{
+	return (((t_number *)i)->number == ((t_number *)j)->number);
 }
 
 int	check_for_repeats(t_list **dup)
@@ -139,17 +144,21 @@ int	check_for_repeats(t_list **dup)
 	return (0);
 
 }
-// void	assign_relative_value(t_list *lst,t_list *dup)
-// {
-// 	t_list	*aux;
-// 	long	len;
 
-// 	len = 0;
-// 	while (dup)
-// 		aux = search(lst, dup->content);
-// 		aux->content = len++;
+void	assign_relative_value(t_list *lst,t_list *dup)
+{
+	t_list	*aux;
+	long	len;
 
-// }
+	len = 0;
+	while (dup)
+	{
+		aux = lst_search(lst, dup->content, push_cmp_isequal);
+		((t_number *)aux->content)->index = len++;
+		dup = dup->next;
+	}
+}
+
 
 // 13 1 10 -1 7 3000 -10 -5 0
 // -10 -5 -1 0 1 7 10 13 3000
@@ -168,10 +177,10 @@ void	format_list(t_list* lst)
 	dup = lst_dup(lst, free);
 	if (!dup)
 		error_handler(NULL, lst, NULL);
-	lst_bubble_sort(dup, push_cmp_content);
+	lst_bubble_sort(dup, push_cmp_isgreater);
 	if (check_for_repeats(&dup))
 		error_handler(NULL, lst, NULL);
-	// assign_relative_value(lst, dup);
+	assign_relative_value(lst, dup);
 	// lst_del_all(&dup, NULL);
 	
 
@@ -191,7 +200,7 @@ int	main(int argc, char *argv[])
 	// lst_del_all(&head, free);
 
 	t_list* tmp = head;
-	while (tmp && printf ("HEAD: %ld\n", ((t_number *)tmp->content)->number))
+	while (tmp && printf ("HEAD: %ld INDEX:%ld\n", ((t_number *)tmp->content)->number, ((t_number *)tmp->content)->index))
 		tmp = tmp->next;
 	lst_del_all(&head, free);
 
