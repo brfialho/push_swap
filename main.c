@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/30 00:50:08 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/30 01:17:14 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,16 +159,6 @@ void	assign_relative_value(t_list *lst,t_list *dup)
 	}
 }
 
-
-// 13 1 10 -1 7 3000 -10 -5 0
-// -10 -5 -1 0 1 7 10 13 3000
-
-// 7 4 6 2 5 8 3 1 0 
-
-// either do a third list to not mess up indexes 
-// or do struct
-
-
 #include <stdio.h>
 void	format_list(t_list* lst)
 {
@@ -181,13 +171,12 @@ void	format_list(t_list* lst)
 	if (check_for_repeats(&dup))
 		error_handler(NULL, lst, NULL);
 	assign_relative_value(lst, dup);
-	// lst_del_all(&dup, NULL);
-	
-
-	t_list* tmp = dup;
-	while (tmp && printf ("DUP :%ld\n", ((t_number *)tmp->content)->number))
-		tmp = tmp->next;
 	lst_del_all(&dup, NULL);
+	
+	// t_list* tmp = dup;
+	// while (tmp && printf ("DUP :%ld\n", ((t_number *)tmp->content)->number))
+	// 	tmp = tmp->next;
+	// lst_del_all(&dup, NULL);
 }
 int	main(int argc, char *argv[])
 {
