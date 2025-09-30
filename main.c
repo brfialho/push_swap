@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/29 23:07:30 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/30 00:25:19 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,15 @@ long	push_atol(char *s)
 
 int	append_node(char *input, t_list **head)
 {
-	t_list	*new;
-	long	*n;
+	t_list		*new;
+	t_number	*n;
 
-	n = ft_calloc(1, sizeof(long));
+	n = ft_calloc(1, sizeof(t_number));
 	if (!n)
 		return (0);
-	*n = push_atol(input);
-	if (*n > INT_MAX)
+	n->index = 0;
+	n->number = push_atol(input);
+	if (n->number > INT_MAX)
 		return (free(n), 0);
 	new = lst_new_node(n);
 	if (!new)
@@ -120,37 +121,62 @@ void	*push_copy_content(void	*content)
 
 int	push_cmp_content(void *i, void *j)
 {
-	return (*(long *)i > *(long *)j);
+	return (((t_number *)i)->number > ((t_number *)j)->number);
 }
 
-int	is_repeat(t_list **dup)
+int	check_for_repeats(t_list **dup)
 {
 	t_list	*tmp;
 
 	tmp = *dup;
 	while (tmp && tmp->next)
 	{
-		if (*(long *)tmp->content == *(long *)tmp->next->content)
+		if (((t_number *)tmp->content)->number == 
+			((t_number *)tmp->next->content)->number)
 			return (lst_del_all(dup, NULL), 1);
 		tmp = tmp->next;
 	}
 	return (0);
 
 }
+// void	assign_relative_value(t_list *lst,t_list *dup)
+// {
+// 	t_list	*aux;
+// 	long	len;
+
+// 	len = 0;
+// 	while (dup)
+// 		aux = search(lst, dup->content);
+// 		aux->content = len++;
+
+// }
+
+// 13 1 10 -1 7 3000 -10 -5 0
+// -10 -5 -1 0 1 7 10 13 3000
+
+// 7 4 6 2 5 8 3 1 0 
+
+// either do a third list to not mess up indexes 
+// or do struct
+
 
 #include <stdio.h>
-void	check_for_repeats(t_list* lst)
+void	format_list(t_list* lst)
 {
 	t_list*	dup;
 
 	dup = lst_dup(lst, free);
-	lst_bubble_sort(dup, push_cmp_content);
-	if (is_repeat(&dup))
+	if (!dup)
 		error_handler(NULL, lst, NULL);
+	lst_bubble_sort(dup, push_cmp_content);
+	if (check_for_repeats(&dup))
+		error_handler(NULL, lst, NULL);
+	// assign_relative_value(lst, dup);
 	// lst_del_all(&dup, NULL);
+	
 
 	t_list* tmp = dup;
-	while (tmp && printf ("DUP :%ld\n", *(long *)tmp->content))
+	while (tmp && printf ("DUP :%ld\n", ((t_number *)tmp->content)->number))
 		tmp = tmp->next;
 	lst_del_all(&dup, NULL);
 }
@@ -159,12 +185,13 @@ int	main(int argc, char *argv[])
 	t_list *head;
 
 	head = get_list(argc, argv);
-	check_for_repeats(head);
+	format_list(head);
+	
 
 	// lst_del_all(&head, free);
 
 	t_list* tmp = head;
-	while (tmp && printf ("HEAD: %ld\n", *(long *)tmp->content))
+	while (tmp && printf ("HEAD: %ld\n", ((t_number *)tmp->content)->number))
 		tmp = tmp->next;
 	lst_del_all(&head, free);
 

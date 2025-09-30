@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/26 18:58:43 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/09/30 00:10:50 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # ifndef INT_MIN
 #  define INT_MIN -2147483648
 # endif
+
+struct s_number {
+	long	number;
+	long	index;
+} typedef t_number;
+
 
 #include "libft/headers/libft.h"
 
