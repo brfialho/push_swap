@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/02 17:37:06 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/02 19:19:02 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,9 @@ void	split_input(char *s, t_list **head)
 	ft_split_free(split);
 }
 
-t_list	*get_list(int argc, char* argv[])
+t_list	**get_list(int argc, char* argv[])
 {
 	t_list	**head;
-	t_list	*list;
 	int		i;
 
 	if (argc < 2)
@@ -101,9 +100,7 @@ t_list	*get_list(int argc, char* argv[])
 	i = 1;
 	while (i < argc)
 		split_input(argv[i++], head);
-	list = *head;
-	free(head);
-	return (list);
+	return (head);
 }
 
 void	*push_copy_content(void	*content)
@@ -160,38 +157,42 @@ void	assign_relative_value(t_list *lst,t_list *dup)
 }
 
 #include <stdio.h>
-void	format_list(t_list* lst)
+void	format_list(t_list** head)
 {
 	t_list*	dup;
 
-	dup = lst_dup(lst, free);
+	dup = lst_dup(*head, free);
 	if (!dup)
-		error_handler(NULL, lst, NULL);
+		error_handler(head, *head, NULL);
 	lst_bubble_sort(dup, push_cmp_isgreater);
 	if (check_for_repeats(&dup))
-		error_handler(NULL, lst, NULL);
-	assign_relative_value(lst, dup);
-	//lst_del_all(&dup, NULL);
+		error_handler(head, *head, NULL);
+	assign_relative_value(*head, dup);
 	
 	t_list* tmp = dup;
 	while (tmp && printf ("DUP :%ld\n", ((t_number *)tmp->content)->number))
 		tmp = tmp->next;
+
+		
 	lst_del_all(&dup, NULL);
 }
+
+
 int	main(int argc, char *argv[])
 {
-	t_list *head;
+	t_data data;
 
-	head = get_list(argc, argv);
-	format_list(head);
+	data.head_a = get_list(argc, argv);
+	format_list(data.head_a);
+
 	
-
-	// lst_del_all(&head, free);
-
-	t_list* tmp = head;
+	t_list* tmp = *data.head_a;
 	while (tmp && printf ("HEAD: %ld INDEX:%ld\n", ((t_number *)tmp->content)->number, ((t_number *)tmp->content)->index))
 		tmp = tmp->next;
-	lst_del_all(&head, free);
+
+		
+	lst_del_all(data.head_a, free);
+	free (data.head_a);
 
 // 	(void)argc;
 // 	(void)argv;
