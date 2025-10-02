@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/09/30 01:17:14 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:37:06 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,12 +171,12 @@ void	format_list(t_list* lst)
 	if (check_for_repeats(&dup))
 		error_handler(NULL, lst, NULL);
 	assign_relative_value(lst, dup);
-	lst_del_all(&dup, NULL);
+	//lst_del_all(&dup, NULL);
 	
-	// t_list* tmp = dup;
-	// while (tmp && printf ("DUP :%ld\n", ((t_number *)tmp->content)->number))
-	// 	tmp = tmp->next;
-	// lst_del_all(&dup, NULL);
+	t_list* tmp = dup;
+	while (tmp && printf ("DUP :%ld\n", ((t_number *)tmp->content)->number))
+		tmp = tmp->next;
+	lst_del_all(&dup, NULL);
 }
 int	main(int argc, char *argv[])
 {
