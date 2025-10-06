@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 18:04:43 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:17:28 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,29 @@ void	rr(t_stacks *stack)
 	write(1, "rr\n", 3);
 }
 
+void	sa(t_stacks *stack, int print)
+{
+	if (!*stack->a || !(*stack->a)->next)
+		return ;
+	lst_add_start(stack->a, lst_detach(stack->a, (*stack->a)->next));
+	if (print)
+		write(1, "sa\n", 3);
+}
+
+void	sb(t_stacks *stack, int print)
+{
+	if (!*stack->b || !(*stack->b)->next)
+		return ;
+	lst_add_start(stack->b, lst_detach(stack->b, (*stack->b)->next));
+	if (print)
+		write(1, "sb\n", 3);
+}
+void	ss(t_stacks *stack)
+{
+	sa(stack, FALSE);
+	sb(stack, FALSE);
+	write(1, "ss\n", 3);
+}
 
 
 int	main(int argc, char *argv[])
@@ -275,8 +298,27 @@ int	main(int argc, char *argv[])
 	lst_for_each(*stack.a, print_stack);
 	ft_printf("\n");
 	
+	pb(&stack);
+	pb(&stack);
 	// ra(&stack, TRUE);
-	rr(&stack);
+	sb(&stack, TRUE);
+
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	ft_printf("\n");
+
+
+	pa(&stack);
+	sb(&stack, TRUE);
+	pa(&stack);
+	pa(&stack);
+	// pa(&stack);
+	sb(&stack, TRUE);
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	ft_printf("\n");
+
+	sb(&stack, TRUE);
 	ft_printf("A:\n");
 	lst_for_each(*stack.a, print_stack);
 	ft_printf("\n");
