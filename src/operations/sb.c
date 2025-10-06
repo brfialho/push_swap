@@ -1,0 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sb.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/06 18:54:10 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/06 18:54:30 by brfialho         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../main.h"
+
+int	sb(t_stacks *stack, int print)
+{
+	if (!*stack->b || !(*stack->b)->next)
+		return (FALSE);
+	lst_add_start(stack->b, lst_detach(stack->b, (*stack->b)->next));
+	if (print)
+		write(1, "sb\n", 3);
+	return (TRUE);
+}

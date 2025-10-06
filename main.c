@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 18:50:07 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 19:00:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,111 +185,22 @@ void	init_stack_b(t_stacks *stack)
 		error_handler(stack->a, *stack->a, NULL);
 }
 
-void	pb(t_stacks *stack)
-{
-	if (!*stack->a)
-		return ;
-	lst_add_start(stack->b, lst_detach(stack->a, *stack->a));
-	write(1, "pb\n", 3);
-}
 
-void	pa(t_stacks *stack)
-{
-	if (!*stack->b)
-		return ;
-	lst_add_start(stack->a, lst_detach(stack->b, *stack->b));
-	write(1, "pa\n", 3);
-}
-int	rra(t_stacks *stack, int print)
-{
-	if (!*stack->a)
-		return (FALSE);
-	lst_add_start(stack->a, lst_detach(stack->a , lst_last(*stack->a)));
-	if (print)
-		write(1, "rra\n", 4);
-	return (TRUE);
-}
 
-int	rrb(t_stacks *stack, int print)
-{
-	if (!*stack->b)
-		return (FALSE);
-	lst_add_start(stack->b, lst_detach(stack->b , lst_last(*stack->b)));
-	if (print)
-		write(1, "rrb\n", 4);
-	return (TRUE);
-}
 
-void	rrr(t_stacks *stack)
-{
-	int	print;
 
-	print = 0;
-	print += rra(stack, FALSE);
-	print += rrb(stack, FALSE);
-	if (print)
-		write(1, "rrr\n", 4);
-}
 
-int	ra(t_stacks *stack, int print)
-{
-	if (!*stack->a)
-		return (FALSE);
-	lst_add_end(stack->a, lst_detach(stack->a, *stack->a));
-	if (print)
-		write(1, "ra\n", 3);
-	return (TRUE);
-}
-int	rb(t_stacks *stack, int print)
-{
-	if (!*stack->b)
-		return (FALSE);
-	lst_add_end(stack->b, lst_detach(stack->b, *stack->b));
-	if (print)
-		write(1, "rb\n", 3);
-	return (TRUE);
-}
 
-void	rr(t_stacks *stack)
-{
-	int	print;
 
-	print = 0;
-	print += ra(stack, FALSE);
-	print += rb(stack, FALSE);
-	if (print)
-		write(1, "rr\n", 3);
-}
 
-int	sa(t_stacks *stack, int print)
-{
-	if (!*stack->a || !(*stack->a)->next)
-		return (FALSE);
-	lst_add_start(stack->a, lst_detach(stack->a, (*stack->a)->next));
-	if (print)
-		write(1, "sa\n", 3);
-	return (TRUE);
-}
 
-int	sb(t_stacks *stack, int print)
-{
-	if (!*stack->b || !(*stack->b)->next)
-		return (FALSE);
-	lst_add_start(stack->b, lst_detach(stack->b, (*stack->b)->next));
-	if (print)
-		write(1, "sb\n", 3);
-	return (TRUE);
-}
-void	ss(t_stacks *stack)
-{
-	int	print;
 
-	print = 0;
-	print += sa(stack, FALSE);
-	print += sb(stack, FALSE);
-	if (print)
-		write(1, "ss\n", 3);
-}
+
+
+
+
+
+
 
 
 int	main(int argc, char *argv[])

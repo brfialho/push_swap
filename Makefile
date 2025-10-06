@@ -1,6 +1,17 @@
 CC= cc -Werror -Wextra -Wall
 
-SRC= main.c
+SRC= main.c \
+	src/operations/pa.c \
+	src/operations/pb.c \
+	src/operations/ra.c \
+	src/operations/rb.c \
+	src/operations/rr.c \
+	src/operations/rra.c \
+	src/operations/rrb.c \
+	src/operations/rrr.c \
+	src/operations/sa.c \
+	src/operations/sb.c \
+	src/operations/ss.c
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)
