@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 19:04:06 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 20:09:58 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "libft/headers/libft.h"
 
 struct s_number {
-	long	number;
-	long	index;
+	long			number;
+	unsigned long	index;
 } typedef t_number;
 
 struct s_stacks {

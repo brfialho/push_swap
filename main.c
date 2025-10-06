@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 19:13:16 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 20:12:08 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ int	check_for_repeats(t_list **dup)
 
 void	assign_relative_value(t_list *lst,t_list *dup)
 {
-	t_list	*aux;
-	long	len;
+	t_list			*aux;
+	unsigned long	len;
 
 	len = 0;
 	while (dup)
@@ -186,6 +186,32 @@ void	init_stack_b(t_stacks *stack)
 		error_handler(stack->a, NULL);
 }
 
+// int	calculate_loops(t_list *lst)
+// {
+// 	int	biggest;
+// 	int mrb;
+
+// 	mrb = 8;
+// 	biggest = lst_size(lst) - 1;
+
+// 	int bits = 10000000b;
+	
+	
+
+// 	return (biggest);
+// }
+
+// void	push_radix_sort(t_stacks *stack)
+// {
+// 	int	loops;
+	
+// 	loops = calculate_loops(*stack->a);
+// 	// determine biggest binary
+// 	// loop
+// 	// 		get lst size
+// 	// 		rotate for size then send all 0
+// 	// 		send back
+// }
 
 int	main(int argc, char *argv[])
 {
@@ -195,9 +221,11 @@ int	main(int argc, char *argv[])
 	format_list(stack.a);
 	init_stack_b(&stack);
 
-	ft_printf("A:\n");
-	lst_for_each(*stack.a, print_stack);
-	ft_printf("\n");
+	// ft_printf("A:\n");
+	// lst_for_each(*stack.a, print_stack);
+	// ft_printf("\n");
+
+	//push_radix_sort(&stack);
 
 	
 	lst_del_all(stack.a, free);
