@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 18:17:28 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:50:07 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,18 +185,6 @@ void	init_stack_b(t_stacks *stack)
 		error_handler(stack->a, *stack->a, NULL);
 }
 
-//sa
-//sb
-//ss
-//pa
-//pb
-//ra
-//rb
-//rr
-//rra
-//rrb
-//rrr
-
 void	pb(t_stacks *stack)
 {
 	if (!*stack->a)
@@ -212,77 +200,95 @@ void	pa(t_stacks *stack)
 	lst_add_start(stack->a, lst_detach(stack->b, *stack->b));
 	write(1, "pa\n", 3);
 }
-void	rra(t_stacks *stack, int print)
+int	rra(t_stacks *stack, int print)
 {
 	if (!*stack->a)
-		return ;
+		return (FALSE);
 	lst_add_start(stack->a, lst_detach(stack->a , lst_last(*stack->a)));
 	if (print)
 		write(1, "rra\n", 4);
+	return (TRUE);
 }
 
-void	rrb(t_stacks *stack, int print)
+int	rrb(t_stacks *stack, int print)
 {
 	if (!*stack->b)
-		return ;
+		return (FALSE);
 	lst_add_start(stack->b, lst_detach(stack->b , lst_last(*stack->b)));
 	if (print)
 		write(1, "rrb\n", 4);
+	return (TRUE);
 }
 
 void	rrr(t_stacks *stack)
 {
-	rra(stack, FALSE);
-	rrb(stack, FALSE);
-	write(1, "rrr\n", 4);
+	int	print;
+
+	print = 0;
+	print += rra(stack, FALSE);
+	print += rrb(stack, FALSE);
+	if (print)
+		write(1, "rrr\n", 4);
 }
 
-void	ra(t_stacks *stack, int print)
+int	ra(t_stacks *stack, int print)
 {
 	if (!*stack->a)
-		return ;
+		return (FALSE);
 	lst_add_end(stack->a, lst_detach(stack->a, *stack->a));
 	if (print)
 		write(1, "ra\n", 3);
+	return (TRUE);
 }
-void	rb(t_stacks *stack, int print)
+int	rb(t_stacks *stack, int print)
 {
 	if (!*stack->b)
-		return ;
+		return (FALSE);
 	lst_add_end(stack->b, lst_detach(stack->b, *stack->b));
 	if (print)
 		write(1, "rb\n", 3);
+	return (TRUE);
 }
 
 void	rr(t_stacks *stack)
 {
-	ra(stack, FALSE);
-	rb(stack, FALSE);
-	write(1, "rr\n", 3);
+	int	print;
+
+	print = 0;
+	print += ra(stack, FALSE);
+	print += rb(stack, FALSE);
+	if (print)
+		write(1, "rr\n", 3);
 }
 
-void	sa(t_stacks *stack, int print)
+int	sa(t_stacks *stack, int print)
 {
 	if (!*stack->a || !(*stack->a)->next)
-		return ;
+		return (FALSE);
 	lst_add_start(stack->a, lst_detach(stack->a, (*stack->a)->next));
 	if (print)
 		write(1, "sa\n", 3);
+	return (TRUE);
 }
 
-void	sb(t_stacks *stack, int print)
+int	sb(t_stacks *stack, int print)
 {
 	if (!*stack->b || !(*stack->b)->next)
-		return ;
+		return (FALSE);
 	lst_add_start(stack->b, lst_detach(stack->b, (*stack->b)->next));
 	if (print)
 		write(1, "sb\n", 3);
+	return (TRUE);
 }
 void	ss(t_stacks *stack)
 {
-	sa(stack, FALSE);
-	sb(stack, FALSE);
-	write(1, "ss\n", 3);
+	int	print;
+
+	print = 0;
+	print += sa(stack, FALSE);
+	print += sb(stack, FALSE);
+	if (print)
+		write(1, "ss\n", 3);
 }
 
 
@@ -294,31 +300,6 @@ int	main(int argc, char *argv[])
 	format_list(stack.a);
 	init_stack_b(&stack);
 
-	ft_printf("A:\n");
-	lst_for_each(*stack.a, print_stack);
-	ft_printf("\n");
-	
-	pb(&stack);
-	pb(&stack);
-	// ra(&stack, TRUE);
-	sb(&stack, TRUE);
-
-	ft_printf("A:\n");
-	lst_for_each(*stack.a, print_stack);
-	ft_printf("\n");
-
-
-	pa(&stack);
-	sb(&stack, TRUE);
-	pa(&stack);
-	pa(&stack);
-	// pa(&stack);
-	sb(&stack, TRUE);
-	ft_printf("A:\n");
-	lst_for_each(*stack.a, print_stack);
-	ft_printf("\n");
-
-	sb(&stack, TRUE);
 	ft_printf("A:\n");
 	lst_for_each(*stack.a, print_stack);
 	ft_printf("\n");
