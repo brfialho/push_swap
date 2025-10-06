@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/02 19:19:02 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 18:04:43 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	error_handler(t_list **head, t_list *lst, char **split)
 		ft_split_free(split);
 	ft_printf("Error\n");
 	exit(1);
+}
+#include <stdio.h>
+void	print_stack(void *content)
+{
+	printf("NUMBER :%ld\n", ((t_number *)content)->number);
 }
 
 long	push_atol(char *s)
@@ -156,7 +161,6 @@ void	assign_relative_value(t_list *lst,t_list *dup)
 	}
 }
 
-#include <stdio.h>
 void	format_list(t_list** head)
 {
 	t_list*	dup;
@@ -169,30 +173,119 @@ void	format_list(t_list** head)
 		error_handler(head, *head, NULL);
 	assign_relative_value(*head, dup);
 	
-	t_list* tmp = dup;
-	while (tmp && printf ("DUP :%ld\n", ((t_number *)tmp->content)->number))
-		tmp = tmp->next;
-
+	// lst_for_each(*head, print_stack);
+	// ft_printf("\n");
 		
 	lst_del_all(&dup, NULL);
 }
+void	init_stack_b(t_stacks *stack)
+{
+	stack->b = ft_calloc(1, sizeof(t_list**));
+	if (!stack->b)	
+		error_handler(stack->a, *stack->a, NULL);
+}
+
+//sa
+//sb
+//ss
+//pa
+//pb
+//ra
+//rb
+//rr
+//rra
+//rrb
+//rrr
+
+void	pb(t_stacks *stack)
+{
+	if (!*stack->a)
+		return ;
+	lst_add_start(stack->b, lst_detach(stack->a, *stack->a));
+	write(1, "pb\n", 3);
+}
+
+void	pa(t_stacks *stack)
+{
+	if (!*stack->b)
+		return ;
+	lst_add_start(stack->a, lst_detach(stack->b, *stack->b));
+	write(1, "pa\n", 3);
+}
+void	rra(t_stacks *stack, int print)
+{
+	if (!*stack->a)
+		return ;
+	lst_add_start(stack->a, lst_detach(stack->a , lst_last(*stack->a)));
+	if (print)
+		write(1, "rra\n", 4);
+}
+
+void	rrb(t_stacks *stack, int print)
+{
+	if (!*stack->b)
+		return ;
+	lst_add_start(stack->b, lst_detach(stack->b , lst_last(*stack->b)));
+	if (print)
+		write(1, "rrb\n", 4);
+}
+
+void	rrr(t_stacks *stack)
+{
+	rra(stack, FALSE);
+	rrb(stack, FALSE);
+	write(1, "rrr\n", 4);
+}
+
+void	ra(t_stacks *stack, int print)
+{
+	if (!*stack->a)
+		return ;
+	lst_add_end(stack->a, lst_detach(stack->a, *stack->a));
+	if (print)
+		write(1, "ra\n", 3);
+}
+void	rb(t_stacks *stack, int print)
+{
+	if (!*stack->b)
+		return ;
+	lst_add_end(stack->b, lst_detach(stack->b, *stack->b));
+	if (print)
+		write(1, "rb\n", 3);
+}
+
+void	rr(t_stacks *stack)
+{
+	ra(stack, FALSE);
+	rb(stack, FALSE);
+	write(1, "rr\n", 3);
+}
+
 
 
 int	main(int argc, char *argv[])
 {
-	t_data data;
+	t_stacks stack;
 
-	data.head_a = get_list(argc, argv);
-	format_list(data.head_a);
+	stack.a = get_list(argc, argv);
+	format_list(stack.a);
+	init_stack_b(&stack);
+
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	ft_printf("\n");
+	
+	// ra(&stack, TRUE);
+	rr(&stack);
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	ft_printf("\n");
 
 	
-	t_list* tmp = *data.head_a;
-	while (tmp && printf ("HEAD: %ld INDEX:%ld\n", ((t_number *)tmp->content)->number, ((t_number *)tmp->content)->index))
-		tmp = tmp->next;
-
-		
-	lst_del_all(data.head_a, free);
-	free (data.head_a);
+	lst_del_all(stack.a, free);
+	lst_del_all(stack.b, free);
+	free(stack.a);
+	free(stack.b);
 
 // 	(void)argc;
 // 	(void)argv;

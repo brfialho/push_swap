@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/02 19:18:40 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 16:04:09 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ struct s_number {
 	long	index;
 } typedef t_number;
 
-struct s_data {
-	t_list	**head_a;
-	t_list	**head_b;
-} typedef t_data;
+struct s_stacks {
+	t_list	**a;
+	t_list	**b;
+} typedef t_stacks;
 
 #endif
