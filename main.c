@@ -6,18 +6,19 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 19:00:04 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 19:13:16 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	error_handler(t_list **head, t_list *lst, char **split)
+void	error_handler(t_list **head, char **split)
 {
 	if (head)
+	{
+		lst_del_all(head, free);
 		free(head);
-	if (lst)
-		lst_del_all(&lst, free);
+	}
 	if (split)
 		ft_split_free(split);
 	ft_printf("Error\n");
@@ -85,10 +86,10 @@ void	split_input(char *s, t_list **head)
 	i = 0;
 	split = ft_split(s, ' ');
 	if (!split)
-		error_handler(head, *head, NULL);
+		error_handler(head, NULL);
 	while (split[i])
 		if(!append_node(split[i++], head))
-			error_handler(head, *head, split);
+			error_handler(head, split);
 	ft_split_free(split);
 }
 
@@ -101,7 +102,7 @@ t_list	**get_list(int argc, char* argv[])
 		exit(1);
 	head = ft_calloc(1, sizeof(t_list**));
 	if (!head)
-		error_handler(NULL, NULL, NULL);
+		error_handler(NULL, NULL);
 	i = 1;
 	while (i < argc)
 		split_input(argv[i++], head);
@@ -167,10 +168,10 @@ void	format_list(t_list** head)
 
 	dup = lst_dup(*head, free);
 	if (!dup)
-		error_handler(head, *head, NULL);
+		error_handler(head, NULL);
 	lst_bubble_sort(dup, push_cmp_isgreater);
 	if (check_for_repeats(&dup))
-		error_handler(head, *head, NULL);
+		error_handler(head, NULL);
 	assign_relative_value(*head, dup);
 	
 	// lst_for_each(*head, print_stack);
@@ -182,25 +183,8 @@ void	init_stack_b(t_stacks *stack)
 {
 	stack->b = ft_calloc(1, sizeof(t_list**));
 	if (!stack->b)	
-		error_handler(stack->a, *stack->a, NULL);
+		error_handler(stack->a, NULL);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 int	main(int argc, char *argv[])
