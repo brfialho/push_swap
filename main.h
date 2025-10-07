@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 20:09:58 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 20:39:32 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define MAIN_H
 
 # include "libft/headers/libft.h"
+
+# ifndef MASK
+#  define MASK 9223372036854775808UL
+# endif
 
 struct s_number {
 	long			number;

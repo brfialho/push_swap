@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 20:12:08 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/06 21:55:54 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error_handler(t_list **head, char **split)
 #include <stdio.h>
 void	print_stack(void *content)
 {
-	printf("NUMBER :%ld\n", ((t_number *)content)->number);
+	printf("NUMBER :%ld INDEX: %zu\n", ((t_number *)content)->number, ((t_number *)content)->index);
 }
 
 long	push_atol(char *s)
@@ -186,32 +186,59 @@ void	init_stack_b(t_stacks *stack)
 		error_handler(stack->a, NULL);
 }
 
-// int	calculate_loops(t_list *lst)
-// {
-// 	int	biggest;
-// 	int mrb;
+unsigned long	push_lst_size(t_list *head)
+{
+	unsigned long	size;
 
-// 	mrb = 8;
-// 	biggest = lst_size(lst) - 1;
+	size = 0;
+	while (head)
+	{
+		head = head->next;
+		size++;
+	}
+	return (size);
+}
 
-// 	int bits = 10000000b;
+int	calculate_loops(t_list *lst)
+{
+	int				bits;
+	unsigned long	mask;
+	unsigned long	max_index;
+
+	bits = sizeof(unsigned long) * BYTE;
+	mask = MASK;
+	max_index = push_lst_size(lst) - 1;
+	while (!(mask & max_index) && bits--)
+		mask = mask >> 1;
+	return (bits++);
+}
+void	radix_loop(t_stacks *stack, unsigned long len)
+{
+	static unsigned long	mask = 1;
+	unsigned long			i;
 	
-	
+	i = 0;
+	while (i++ < len)
+	{
+		if (!(((t_number *)((t_list *)*stack->a)->content)->index & mask))
+			pb(stack);
+		ra(stack, TRUE);
+	}
+	while (i--)
+		pa(stack);
+	mask = mask << 1;
+}
 
-// 	return (biggest);
-// }
-
-// void	push_radix_sort(t_stacks *stack)
-// {
-// 	int	loops;
+void	push_radix_sort(t_stacks *stack)
+{
+	int				loop;
+	unsigned long	len;
 	
-// 	loops = calculate_loops(*stack->a);
-// 	// determine biggest binary
-// 	// loop
-// 	// 		get lst size
-// 	// 		rotate for size then send all 0
-// 	// 		send back
-// }
+	len = push_lst_size(*stack->a);
+	loop = calculate_loops(*stack->a);
+	while (loop--)
+		radix_loop(stack, len);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -223,18 +250,18 @@ int	main(int argc, char *argv[])
 
 	// ft_printf("A:\n");
 	// lst_for_each(*stack.a, print_stack);
-	// ft_printf("\n");
+	// printf("\n");
 
-	//push_radix_sort(&stack);
+	push_radix_sort(&stack);
 
+	// ft_printf("A:\n");
+	// lst_for_each(*stack.a, print_stack);
+	// printf("\n");
 	
 	lst_del_all(stack.a, free);
 	lst_del_all(stack.b, free);
 	free(stack.a);
 	free(stack.b);
-
-// 	(void)argc;
-// 	(void)argv;
 }
 
 //TO DO
