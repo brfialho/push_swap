@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:57:27 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 18:57:36 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:51:53 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rb(t_stacks *stack, int print)
 {
-	if (!*stack->b)
+	if (!*stack->b || !((t_list *)*stack->b)->next)
 		return (FALSE);
 	lst_add_end(stack->b, lst_detach(stack->b, *stack->b));
 	if (print)
