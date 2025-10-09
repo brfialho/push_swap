@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 21:55:54 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/08 21:24:01 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	push_cmp_isgreater(void *i, void *j)
 	return (((t_number *)i)->number > ((t_number *)j)->number);
 }
 
+
 int	push_cmp_isequal(void *i, void *j)
 {
 	return (((t_number *)i)->number == ((t_number *)j)->number);
@@ -173,10 +174,6 @@ void	format_list(t_list** head)
 	if (check_for_repeats(&dup))
 		error_handler(head, NULL);
 	assign_relative_value(*head, dup);
-	
-	// lst_for_each(*head, print_stack);
-	// ft_printf("\n");
-		
 	lst_del_all(&dup, NULL);
 }
 void	init_stack_b(t_stacks *stack)
@@ -212,33 +209,31 @@ int	calculate_loops(t_list *lst)
 		mask = mask >> 1;
 	return (bits++);
 }
-void	radix_loop(t_stacks *stack, unsigned long len)
-{
-	static unsigned long	mask = 1;
-	unsigned long			i;
-	
-	i = 0;
-	while (i++ < len)
-	{
-		if (!(((t_number *)((t_list *)*stack->a)->content)->index & mask))
-			pb(stack);
-		ra(stack, TRUE);
-	}
-	while (i--)
-		pa(stack);
-	mask = mask << 1;
-}
 
 void	push_radix_sort(t_stacks *stack)
 {
 	int				loop;
+	unsigned long	mask;
+	unsigned long	i;
 	unsigned long	len;
-	
+
 	len = push_lst_size(*stack->a);
 	loop = calculate_loops(*stack->a);
+	mask = 1;
 	while (loop--)
-		radix_loop(stack, len);
+	{
+		i = 0;
+		while (i++ < len)
+			if (!(((t_number *)((t_list *)*stack->a)->content)->index & mask))
+				pb(stack);
+			else
+				ra(stack, TRUE);
+		while (i--)
+			pa(stack);
+		mask = mask << 1;
+	}
 }
+
 
 int	main(int argc, char *argv[])
 {
@@ -248,21 +243,18 @@ int	main(int argc, char *argv[])
 	format_list(stack.a);
 	init_stack_b(&stack);
 
-	// ft_printf("A:\n");
-	// lst_for_each(*stack.a, print_stack);
-	// printf("\n");
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	printf("\n");
 
 	push_radix_sort(&stack);
 
-	// ft_printf("A:\n");
-	// lst_for_each(*stack.a, print_stack);
-	// printf("\n");
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	printf("\n");
 	
 	lst_del_all(stack.a, free);
 	lst_del_all(stack.b, free);
 	free(stack.a);
 	free(stack.b);
 }
-
-//TO DO
-// refator code to be more readable
