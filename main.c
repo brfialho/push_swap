@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/10 18:06:02 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/10 18:50:06 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,27 @@ void	push_radix_sort(t_stacks *stack)
 		mask = mask << 1;
 	}
 }
+void	push_sort_three(t_stacks *stack)
+{
+	unsigned long first;
+	unsigned long second;
 
+	first = ((t_number *)((t_list *)*stack->a)->content)->index;
+	second = ((t_number *)((t_list *)*stack->a)->next->content)->index;
+
+	if (first == 1 && second == 0)
+		sa(stack, TRUE);
+	else if (first == 1 && second == 2)
+		rra(stack, TRUE);
+	else if (first == 2 && second == 0)
+		ra(stack, TRUE);
+	else if (first == 2 && 
+		ra(stack, TRUE))
+		sa(stack, TRUE);
+	else if (\
+		rra(stack, TRUE))
+		sa(stack, TRUE);
+}
 
 int	main(int argc, char *argv[])
 {
@@ -264,16 +284,16 @@ int	main(int argc, char *argv[])
 	format_list(stack.a);
 	init_stack_b(&stack);
 
-	ft_printf("A:\n");
-	lst_for_each(*stack.a, print_stack);
-	printf("\n");
+	// ft_printf("A:\n");
+	// lst_for_each(*stack.a, print_stack);
+	// printf("\n");
 
-	push_radix_sort(&stack);
+	push_sort_three(&stack);
 
-	ft_printf("A:\n");
-	lst_for_each(*stack.a, print_stack);
-	printf("\n");
-	
+	// ft_printf("A:\n");
+	// lst_for_each(*stack.a, print_stack);
+	// printf("\n");
+
 	lst_del_all(stack.a, free);
 	lst_del_all(stack.b, free);
 	free(stack.a);
