@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/08 21:24:01 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/10 18:06:02 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,26 @@ void	assign_relative_value(t_list *lst,t_list *dup)
 		dup = dup->next;
 	}
 }
+int	is_sorted(t_list **head, t_list **dup)
+{
+	t_list	*lst;
+	t_list	*dup_lst;
 
+	lst = *head;
+	dup_lst = *dup;
+	while (lst)
+	{
+		if (((t_number *)lst->content)->number != \
+		((t_number *)dup_lst->content)->number)
+			return (FALSE);
+		lst = lst->next;
+		dup_lst = dup_lst->next;
+	}
+	lst_del_all(dup, NULL);
+	lst_del_all(head, free);
+	free(head);
+	return (TRUE);
+}
 void	format_list(t_list** head)
 {
 	t_list*	dup;
@@ -173,6 +192,8 @@ void	format_list(t_list** head)
 	lst_bubble_sort(dup, push_cmp_isgreater);
 	if (check_for_repeats(&dup))
 		error_handler(head, NULL);
+	if (is_sorted(head, &dup))
+		exit(0);
 	assign_relative_value(*head, dup);
 	lst_del_all(&dup, NULL);
 }
