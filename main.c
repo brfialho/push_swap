@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/10 18:50:06 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/12 20:02:41 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,8 +268,8 @@ void	push_sort_three(t_stacks *stack)
 		rra(stack, TRUE);
 	else if (first == 2 && second == 0)
 		ra(stack, TRUE);
-	else if (first == 2 && 
-		ra(stack, TRUE))
+	else if (first == 2 &&
+			ra(stack, TRUE))
 		sa(stack, TRUE);
 	else if (\
 		rra(stack, TRUE))
