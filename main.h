@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/08 18:18:05 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/12 21:07:57 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ struct s_stacks {
 	t_list	**a;
 	t_list	**b;
 } typedef t_stacks;
+
 
 // Operations
 

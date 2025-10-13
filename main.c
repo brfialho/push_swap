@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/12 20:02:41 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/12 22:31:19 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,54 @@ void	push_sort_three(t_stacks *stack)
 		sa(stack, TRUE);
 }
 
+long	get_index(t_list *node)
+{
+	return (((t_number *)node->content)->index);
+}
+struct s_pivots {
+	long	first;
+	long	second;
+} typedef t_pivots;
+
+// struct s_chunks {
+// 	int len;
+// 	int 
+// } typedef t_chunks;
+
+void	split_chunk(t_stacks *stack, long size)
+{
+	t_pivots	pivots;
+
+	pivots.first = size / 3;
+	pivots.second = (size / 3) * 2;
+	while (--size)
+	{
+		if (get_index(*stack->a) >= pivots.second)
+			ra(stack, TRUE);
+		else if (!(get_index(*stack->a) < pivots.first))
+			pb(stack);
+		else
+		{
+			pb(stack);
+			rb(stack, TRUE);
+		}
+	}
+}
+void	push_quick_sort(t_stacks *stack, long size)
+{
+	if (size <= 3)
+	{
+		push_sort_three(stack);
+		return ;
+	}
+	
+	split_chunk(stack, size);
+	push_quick_sort(stack, push_lst_size(*stack->a));
+	push_quick_sort(stack, push_lst_size(*stack->a));
+	push_quick_sort(stack, push_lst_size(*stack->a));
+}
+
+
 int	main(int argc, char *argv[])
 {
 	t_stacks stack;
@@ -284,15 +332,20 @@ int	main(int argc, char *argv[])
 	format_list(stack.a);
 	init_stack_b(&stack);
 
-	// ft_printf("A:\n");
-	// lst_for_each(*stack.a, print_stack);
-	// printf("\n");
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	printf("\n");
 
-	push_sort_three(&stack);
+	// push_sort_three(&stack);
+	split_chunk(&stack, push_lst_size(*stack.a));
+	
+	ft_printf("A:\n");
+	lst_for_each(*stack.a, print_stack);
+	printf("\n");
 
-	// ft_printf("A:\n");
-	// lst_for_each(*stack.a, print_stack);
-	// printf("\n");
+	ft_printf("B:\n");
+	lst_for_each(*stack.b, print_stack);
+	printf("\n");
 
 	lst_del_all(stack.a, free);
 	lst_del_all(stack.b, free);
