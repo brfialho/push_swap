@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   push_cmp_isgreater.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:04:26 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 19:04:37 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+int	push_cmp_isgreater(void *i, void *j)
 {
-	if (head)
-	{
-		lst_del_all(head, free);
-		free(head);
-	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
+	return (((t_number *)i)->number > ((t_number *)j)->number);
 }

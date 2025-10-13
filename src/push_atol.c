@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   push_atol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:01:39 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 19:01:58 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+long	push_atol(char *s)
 {
-	if (head)
-	{
-		lst_del_all(head, free);
-		free(head);
+	long	sum;
+	int		sign;
+
+	sign = 1;
+	sum = 0;
+	if (*s == '+' || *s == '-')
+	{		
+		if (*s == '-' && s++)
+			sign = -1;
+		else
+			s++;
 	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
+	while (*s)
+	{
+		if (!ft_isdigit(*s))
+			return ((long)INT_MAX + INT_MAX);
+		sum = sum * 10 + *s++ - '0';
+		if ((sum > (long)INT_MAX + 1 && sign < 0) ||
+			(sum > (long)INT_MAX && sign > 0))
+			return ((long)INT_MAX + INT_MAX);
+	}
+	return (sum * sign);
 }

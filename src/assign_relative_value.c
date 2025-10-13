@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   assign_relative_value.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:06:01 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 20:32:19 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+void	assign_relative_value(t_list *lst,t_list *dup)
 {
-	if (head)
+	t_list			*aux;
+	unsigned long	len;
+
+	len = 0;
+	while (dup)
 	{
-		lst_del_all(head, free);
-		free(head);
+		aux = lst_search(lst, dup->content, push_cmp_isequal);
+		((t_number *)aux->content)->index = len++;
+		dup = dup->next;
 	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
 }

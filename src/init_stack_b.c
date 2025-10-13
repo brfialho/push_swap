@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   init_stack_b.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:07:56 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 19:08:12 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+void	init_stack_b(t_stacks *stack)
 {
-	if (head)
-	{
-		lst_del_all(head, free);
-		free(head);
-	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
+	stack->b = ft_calloc(1, sizeof(t_list**));
+	if (!stack->b)	
+		error_handler(stack->a, NULL);
 }

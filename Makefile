@@ -11,7 +11,25 @@ SRC= main.c \
 	src/operations/rrr.c \
 	src/operations/sa.c \
 	src/operations/sb.c \
-	src/operations/ss.c
+	src/operations/ss.c \
+	src/append_node.c \
+	src/assign_relative_value.c \
+	src/calculate_loops.c \
+	src/check_for_repeats.c \
+	src/error_handler.c \
+	src/format_list.c \
+	src/get_list.c \
+	src/init_stack_b.c \
+	src/is_sorted.c \
+	src/push_atol.c \
+	src/push_cmp_isequal.c \
+	src/push_cmp_isgreater.c \
+	src/push_copy_content.c \
+	src/push_lst_size.c \
+	src/push_radix_sort.c \
+	src/push_sort_three.c \
+	src/split_input.c
+
 
 O_DIR= obj/
 OBJ= $(SRC:%.c=$(O_DIR)%.o)

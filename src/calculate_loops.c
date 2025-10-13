@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   calculate_loops.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:09:09 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 20:33:27 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+int	calculate_loops(t_list *lst)
 {
-	if (head)
-	{
-		lst_del_all(head, free);
-		free(head);
-	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
+	int				bits;
+	unsigned long	mask;
+	unsigned long	max_index;
+
+	bits = sizeof(unsigned long) * BYTE;
+	mask = MASK;
+	max_index = push_lst_size(lst) - 1;
+	while (!(mask & max_index) && bits--)
+		mask = mask >> 1;
+	return (bits++);
 }

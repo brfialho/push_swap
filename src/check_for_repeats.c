@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   check_for_repeats.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:05:35 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 19:05:45 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+int	check_for_repeats(t_list **dup)
 {
-	if (head)
+	t_list	*tmp;
+
+	tmp = *dup;
+	while (tmp && tmp->next)
 	{
-		lst_del_all(head, free);
-		free(head);
+		if (((t_number *)tmp->content)->number == 
+			((t_number *)tmp->next->content)->number)
+			return (lst_del_all(dup, NULL), 1);
+		tmp = tmp->next;
 	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
+	return (0);
+
 }

@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   push_radix_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:09:48 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 20:33:08 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+void	push_radix_sort(t_stacks *stack)
 {
-	if (head)
+	int				loop;
+	unsigned long	mask;
+	unsigned long	i;
+	unsigned long	len;
+
+	len = push_lst_size(*stack->a);
+	loop = calculate_loops(*stack->a);
+	mask = 1;
+	while (loop--)
 	{
-		lst_del_all(head, free);
-		free(head);
+		i = 0;
+		while (i++ < len)
+			if (!(((t_number *)((t_list *)*stack->a)->content)->index & mask))
+				pb(stack);
+			else
+				ra(stack, TRUE);
+		while (i--)
+			pa(stack);
+		mask = mask << 1;
 	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
 }

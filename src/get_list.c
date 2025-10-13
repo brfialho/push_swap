@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   get_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:01:07 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:03:16 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 19:03:29 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../main.h"
 
-void	error_handler(t_list **head, char **split)
+t_list	**get_list(int argc, char* argv[])
 {
-	if (head)
-	{
-		lst_del_all(head, free);
-		free(head);
-	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
+	t_list	**head;
+	int		i;
+
+	if (argc < 2)
+		exit(1);
+	head = ft_calloc(1, sizeof(t_list**));
+	if (!head)
+		error_handler(NULL, NULL);
+	i = 1;
+	while (i < argc)
+		split_input(argv[i++], head);
+	return (head);
 }
