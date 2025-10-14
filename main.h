@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 22:18:59 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 22:20:59 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # ifndef MASK
 #  define MASK 9223372036854775808UL
 # endif
+
+// Structs
 
 typedef struct s_number
 {
