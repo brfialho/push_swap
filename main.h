@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 21:43:24 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 22:18:59 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MAIN_H
 
 # include "libft/headers/libft.h"
+
+// Macro for Radix logic
 
 # ifndef MASK
 #  define MASK 9223372036854775808UL
@@ -47,23 +49,27 @@ void	ss(t_stacks *stack);
 
 // Functions
 
-int		append_node(char *input, t_list **head);
+t_list	**get_list(int argc, char *argv[]);
+
+void	*push_copy_content(void	*content);
+
 void	assign_relative_value(t_list *lst, t_list *dup);
-int		calculate_loops(t_list *lst);
-int		check_for_repeats(t_list **dup);
 void	error_handler(t_list **head, char **split);
 void	format_list(t_list **head);
-t_list	**get_list(int argc, char *argv[]);
 void	init_stack_b(t_stacks *stack);
-int		is_sorted(t_list **head, t_list **dup);
-long	push_atol(char *s);
-int		push_cmp_isequal(void *i, void *j);
-int		push_cmp_isgreater(void *i, void *j);
-void	*push_copy_content(void	*content);
-long	push_lst_size(t_list *head);
 void	push_radix_sort(t_stacks *stack);
 void	push_sort_three(t_stacks *stack);
 void	push_sort_five(t_stacks *stack);
 void	split_input(char *s, t_list **head);
+
+int		push_cmp_isgreater(void *i, void *j);
+int		append_node(char *input, t_list **head);
+int		calculate_loops(t_list *lst);
+int		check_for_repeats(t_list **dup);
+int		is_sorted(t_list **head, t_list **dup);
+int		push_cmp_isequal(void *i, void *j);
+
+long	push_atol(char *s);
+long	push_lst_size(t_list *head);
 
 #endif
