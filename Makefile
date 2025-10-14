@@ -42,7 +42,8 @@ LIBPATH= libft/
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+	@echo -n "\033[32m\nSuccessfully Generated \033[0mPush Swap \n\n"
 
 $(O_DIR)%.o: %.c
 	@mkdir -p $(dir $@)

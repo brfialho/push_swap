@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:05:35 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:05:45 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:38:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int	check_for_repeats(t_list **dup)
 	tmp = *dup;
 	while (tmp && tmp->next)
 	{
-		if (((t_number *)tmp->content)->number == 
-			((t_number *)tmp->next->content)->number)
+		if (((t_number *)tmp->content)->number
+			== ((t_number *)tmp->next->content)->number)
 			return (lst_del_all(dup, NULL), 1);
 		tmp = tmp->next;
 	}
 	return (0);
-
 }

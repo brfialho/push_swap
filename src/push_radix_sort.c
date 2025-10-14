@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:09:48 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 20:33:08 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 21:08:41 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ void	push_radix_sort(t_stacks *stack)
 	{
 		i = 0;
 		while (i++ < len)
+		{
 			if (!(((t_number *)((t_list *)*stack->a)->content)->index & mask))
 				pb(stack);
 			else
 				ra(stack, TRUE);
+		}
 		while (i--)
 			pa(stack);
 		mask = mask << 1;

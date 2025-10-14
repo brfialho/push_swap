@@ -6,13 +6,13 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:08:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 20:32:47 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 21:05:59 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
-unsigned long	push_lst_size(t_list *head)
+long	push_lst_size(t_list *head)
 {
 	long	size;
 

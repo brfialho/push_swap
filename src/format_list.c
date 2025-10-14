@@ -6,15 +6,15 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:07:31 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:07:41 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:42:31 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
-void	format_list(t_list** head)
+void	format_list(t_list **head)
 {
-	t_list*	dup;
+	t_list	*dup;
 
 	dup = lst_dup(*head, free);
 	if (!dup)

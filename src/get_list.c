@@ -6,20 +6,20 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:03:16 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:03:29 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 20:42:52 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
-t_list	**get_list(int argc, char* argv[])
+t_list	**get_list(int argc, char *argv[])
 {
 	t_list	**head;
 	int		i;
 
 	if (argc < 2)
 		exit(1);
-	head = ft_calloc(1, sizeof(t_list**));
+	head = ft_calloc(1, sizeof(t_list **));
 	if (!head)
 		error_handler(NULL, NULL);
 	i = 1;
