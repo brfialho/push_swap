@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_input.c                                      :+:      :+:    :+:   */
+/*   push_sort_five.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 19:02:51 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 22:06:41 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 21:33:17 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/13 22:02:37 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
-void	split_input(char *s, t_list **head)
+void	push_sort_five(t_stacks *stack)
 {
-	long	i;
-	char	**split;
+	int	len;
 
-	i = 0;
-	split = ft_split(s, ' ');
-	if (!split)
-		error_handler(head, NULL);
-	while (split[i])
-		if (!append_node(split[i++], head))
-			error_handler(head, split);
-	ft_split_free(split);
+	len = 5;
+	while (len--)
+	{
+		if (((t_number *)((t_list *)*stack->a)->content)->index == 3
+			|| ((t_number *)((t_list *)*stack->a)->content)->index == 4)
+			pb(stack);
+		else
+			ra(stack, TRUE);
+	}
+	push_sort_three(stack);
+	if (((t_number *)((t_list *)*stack->b)->content)->index == 3)
+		sb(stack, TRUE);
+	pa(stack);
+	pa(stack);
+	ra(stack, TRUE);
+	ra(stack, TRUE);
 }

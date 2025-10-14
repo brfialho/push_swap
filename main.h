@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 20:55:02 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 21:43:24 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	*push_copy_content(void	*content);
 long	push_lst_size(t_list *head);
 void	push_radix_sort(t_stacks *stack);
 void	push_sort_three(t_stacks *stack);
+void	push_sort_five(t_stacks *stack);
 void	split_input(char *s, t_list **head);
 
 #endif

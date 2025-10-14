@@ -28,6 +28,7 @@ SRC= main.c \
 	src/push_lst_size.c \
 	src/push_radix_sort.c \
 	src/push_sort_three.c \
+	src/push_sort_five.c \
 	src/split_input.c
 
 

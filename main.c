@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 21:10:42 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/13 22:05:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	main(int argc, char *argv[])
 	stack.a = get_list(argc, argv);
 	format_list(stack.a);
 	init_stack_b(&stack);
-
 	len = push_lst_size(*stack.a);
 	if (len == 3)
 		push_sort_three(&stack);
-	push_radix_sort(&stack);
-
-
+	else if (len == 5)
+		push_sort_five(&stack);
+	else
+		push_radix_sort(&stack);
 	lst_del_all(stack.a, free);
 	lst_del_all(stack.b, free);
 	free(stack.a);
@@ -36,7 +36,8 @@ int	main(int argc, char *argv[])
 // #include <stdio.h>
 // void	print_stack(void *content)
 // {
-// 	printf("NUMBER :%ld INDEX: %zu\n", ((t_number *)content)->number, ((t_number *)content)->index);
+// 	printf("NUMBER :%ld INDEX: %zu\n", ((t_number *)content)->number,
+	// ((t_number *)content)->index);
 // }
 // int	main(int argc, char *argv[])
 // {
@@ -54,7 +55,10 @@ int	main(int argc, char *argv[])
 // 	len = push_lst_size(*stack.a);
 // 	if (len == 3)
 // 		push_sort_three(&stack);
-// 	push_radix_sort(&stack);
+// 	else if (len == 5)
+// 		push_sort_five(&stack);
+// 	else
+// 		push_radix_sort(&stack);
 
 // 	ft_printf("A:\n");
 // 	lst_for_each(*stack.a, print_stack);
