@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:53:49 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 22:05:04 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/15 20:04:21 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char *argv[])
 // void	print_stack(void *content)
 // {
 // 	printf("NUMBER :%ld INDEX: %zu\n", ((t_number *)content)->number,
-	// ((t_number *)content)->index);
+// 	((t_number *)content)->index);
 // }
 // int	main(int argc, char *argv[])
 // {
