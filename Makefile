@@ -68,6 +68,7 @@ clean:
 	@rm -rf $(O_DIR)
 
 fclean:
+	@make --no-print-directory -C $(LIBPATH) fclean
 	@echo "\033[95mCleansing Push Swap"
 	@sleep 0.7
 	@echo -n "."
@@ -76,9 +77,8 @@ fclean:
 	@sleep 0.2
 	@echo ".\033[0m"
 	@sleep 0.2
-	@make --no-print-directory -C $(LIBPATH) fclean
 	@rm -rf $(O_DIR)
-	@rm -f $(S_NAME) $(C_NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
