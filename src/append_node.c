@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:02:11 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:02:28 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/19 00:00:46 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 int	append_node(char *input, t_list **head)
 {
 	t_list		*new;
-	t_number	*n;
+	long		*n;
 
-	n = ft_calloc(1, sizeof(t_number));
+	n = ft_calloc(1, sizeof(long));
 	if (!n)
 		return (0);
-	n->index = 0;
-	n->number = push_atol(input);
-	if (n->number > INT_MAX)
+	*n = push_atol(input);
+	if (*n > INT_MAX)
 		return (free(n), 0);
 	new = lst_new_node(n);
 	if (!new)

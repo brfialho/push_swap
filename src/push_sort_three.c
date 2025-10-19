@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:10:09 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/17 20:52:41 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/19 00:08:12 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	push_sort_three(t_stacks *stack)
 {
-	unsigned long	first;
-	unsigned long	second;
+	long	first;
+	long	second;
 
-	first = ((t_number *)((t_list *)*stack->a)->content)->index;
-	second = ((t_number *)((t_list *)*stack->a)->next->content)->index;
+	first = *(long *)((t_list *)*stack->a)->content;
+	second = *(long *)((t_list *)*stack->a)->next->content;
 	if (first == 1 && second == 0)
 		sa(stack, TRUE);
 	else if (first == 1 && second == 2)

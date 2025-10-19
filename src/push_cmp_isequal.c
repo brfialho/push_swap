@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:04:50 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:04:58 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/19 00:06:28 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	push_cmp_isequal(void *i, void *j)
 {
-	return (((t_number *)i)->number == ((t_number *)j)->number);
+	return (*(long *)i == *(long *)j);
 }

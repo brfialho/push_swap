@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/18 23:10:48 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/18 23:59:26 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@
 # endif
 
 // Structs
-
-typedef struct s_number
-{
-	long			number;
-	unsigned long	index;
-}	t_number;
-
 typedef struct s_stacks
 {
 	t_list	**a;

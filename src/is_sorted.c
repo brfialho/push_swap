@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:06:28 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 19:06:38 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/19 00:19:09 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	is_sorted(t_list **head, t_list **dup)
 	dup_lst = *dup;
 	while (lst)
 	{
-		if (((t_number *)lst->content)->number != \
-		((t_number *)dup_lst->content)->number)
+		if (*(long *)lst->content != *(long *)dup_lst->content)
 			return (FALSE);
 		lst = lst->next;
 		dup_lst = dup_lst->next;
