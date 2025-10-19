@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:07:31 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 20:42:31 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/18 23:12:35 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	format_list(t_list **head)
 		error_handler(head, NULL);
 	if (is_sorted(head, &dup))
 		exit(0);
-	assign_relative_value(*head, dup);
+	assign_relative_value(dup);
 	lst_del_all(&dup, NULL);
 }

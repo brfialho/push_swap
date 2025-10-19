@@ -6,7 +6,7 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/18 16:55:02 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 22:20:59 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/18 23:10:48 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_list	**get_list(int argc, char *argv[]);
 
 void	*push_copy_content(void	*content);
 
-void	assign_relative_value(t_list *lst, t_list *dup);
+void	assign_relative_value(t_list *dup);
 void	error_handler(t_list **head, char **split);
 void	format_list(t_list **head);
 void	init_stack_b(t_stacks *stack);
