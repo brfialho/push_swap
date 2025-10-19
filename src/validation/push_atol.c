@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_sort_five.c                                   :+:      :+:    :+:   */
+/*   push_atol.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 21:33:17 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/19 00:09:57 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:01:39 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
-void	push_sort_five(t_stacks *stack)
+long	push_atol(char *s)
 {
-	int	len;
+	long	sum;
+	int		sign;
 
-	len = 5;
-	while (len--)
-	{
-		if (*(long *)((t_list *)*stack->a)->content == 3
-			|| *(long *)((t_list *)*stack->a)->content == 4)
-			pb(stack);
+	sign = 1;
+	sum = 0;
+	if (*s == '+' || *s == '-')
+	{		
+		if (*s == '-' && s++)
+			sign = -1;
 		else
-			ra(stack, TRUE);
+			s++;
 	}
-	push_sort_three(stack);
-	if (*(long *)((t_list *)*stack->b)->content == 3)
-		sb(stack, TRUE);
-	pa(stack);
-	pa(stack);
-	ra(stack, TRUE);
-	ra(stack, TRUE);
+	while (*s)
+	{
+		if (!ft_isdigit(*s))
+			return ((long)INT_MAX + INT_MAX);
+		sum = sum * 10 + *s++ - '0';
+		if ((sum > (long)INT_MAX + 1 && sign < 0)
+			|| (sum > (long)INT_MAX && sign > 0))
+			return ((long)INT_MAX + INT_MAX);
+	}
+	return (sum * sign);
 }

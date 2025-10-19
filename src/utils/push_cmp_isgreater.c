@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_stack_b.c                                     :+:      :+:    :+:   */
+/*   push_cmp_isgreater.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 19:07:56 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 20:38:50 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:04:26 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
-void	init_stack_b(t_stacks *stack)
+int	push_cmp_isgreater(void *i, void *j)
 {
-	stack->b = ft_calloc(1, sizeof(t_list **));
-	if (!stack->b)
-		error_handler(stack->a, NULL);
+	return (*(long *)i > *(long *)j);
 }

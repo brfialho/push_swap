@@ -1,4 +1,4 @@
-CC= cc -Werror -Wextra -Wall
+CC= cc -Werror -Wextra -Wall -I.
 
 SRC= main.c \
 	src/operations/pa.c \
@@ -12,24 +12,23 @@ SRC= main.c \
 	src/operations/sa.c \
 	src/operations/sb.c \
 	src/operations/ss.c \
-	src/append_node.c \
-	src/assign_relative_value.c \
-	src/calculate_loops.c \
-	src/check_for_repeats.c \
-	src/error_handler.c \
-	src/format_list.c \
-	src/get_list.c \
-	src/init_stack_b.c \
-	src/is_sorted.c \
-	src/push_atol.c \
-	src/push_cmp_isequal.c \
-	src/push_cmp_isgreater.c \
-	src/push_copy_content.c \
-	src/push_lst_size.c \
-	src/push_radix_sort.c \
-	src/push_sort_three.c \
-	src/push_sort_five.c \
-	src/split_input.c
+	src/sorting/calculate_loops.c \
+	src/sorting/push_radix_sort.c \
+	src/sorting/push_sort_five.c \
+	src/sorting/push_sort_three.c \
+	src/utils/error_handler.c \
+	src/utils/init_stack_b.c \
+	src/utils/push_cmp_isequal.c \
+	src/utils/push_cmp_isgreater.c \
+	src/utils/push_lst_size.c \
+	src/validation/append_node.c \
+	src/validation/assign_relative_value.c \
+	src/validation/check_for_repeats.c \
+	src/validation/format_list.c \
+	src/validation/get_list.c \
+	src/validation/is_sorted.c \
+	src/validation/push_atol.c \
+	src/validation/split_input.c
 
 
 O_DIR= obj/

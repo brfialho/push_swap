@@ -6,11 +6,11 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:10:09 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/19 00:08:12 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
 void	push_sort_three(t_stacks *stack)
 {

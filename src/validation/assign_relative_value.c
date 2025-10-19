@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_cmp_isequal.c                                 :+:      :+:    :+:   */
+/*   assign_relative_value.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 19:04:50 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/19 00:06:28 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:06:01 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
-int	push_cmp_isequal(void *i, void *j)
+void	assign_relative_value(t_list *dup)
 {
-	return (*(long *)i == *(long *)j);
+	long	len;
+
+	len = 0;
+	while (dup)
+	{
+		*(long *)dup->content = len++;
+		dup = dup->next;
+	}
 }

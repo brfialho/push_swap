@@ -6,11 +6,11 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 19:06:28 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/19 00:19:09 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
 int	is_sorted(t_list **head, t_list **dup)
 {

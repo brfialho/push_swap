@@ -6,11 +6,11 @@
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/06 18:56:15 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/06 18:56:36 by brfialho         ###   ########.fr       */
+/*   Updated: 2025/10/19 01:15:25 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../main.h"
+#include "main.h"
 
 void	pb(t_stacks *stack)
 {

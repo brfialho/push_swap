@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_for_repeats.c                                :+:      :+:    :+:   */
+/*   init_stack_b.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 19:05:35 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/19 00:22:52 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:07:56 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
-int	check_for_repeats(t_list **dup)
+void	init_stack_b(t_stacks *stack)
 {
-	t_list	*tmp;
-
-	tmp = *dup;
-	while (tmp && tmp->next)
-	{
-		if (*(long *)tmp->content == *(long *)tmp->next->content)
-			return (lst_del_all(dup, NULL), 1);
-		tmp = tmp->next;
-	}
-	return (0);
+	stack->b = ft_calloc(1, sizeof(t_list **));
+	if (!stack->b)
+		error_handler(stack->a, NULL);
 }

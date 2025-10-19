@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handler.c                                    :+:      :+:    :+:   */
+/*   split_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:53:24 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 20:41:01 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:02:51 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
-void	error_handler(t_list **head, char **split)
+void	split_input(char *s, t_list **head)
 {
-	if (head)
-	{
-		lst_del_all(head, free);
-		free(head);
-	}
-	if (split)
-		ft_split_free(split);
-	ft_printf("Error\n");
-	exit(1);
+	long	i;
+	char	**split;
+
+	i = 0;
+	split = ft_split(s, ' ');
+	if (!split)
+		error_handler(head, NULL);
+	while (split[i])
+		if (!append_node(split[i++], head))
+			error_handler(head, split);
+	ft_split_free(split);
 }

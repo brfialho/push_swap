@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_input.c                                      :+:      :+:    :+:   */
+/*   push_radix_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brfialho <brfialho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 19:02:51 by brfialho          #+#    #+#             */
-/*   Updated: 2025/10/13 22:06:41 by brfialho         ###   ########.fr       */
+/*   Created: 2025/10/13 19:09:48 by brfialho          #+#    #+#             */
+/*   Updated: 2025/10/19 01:15:04 by brfialho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../main.h"
+#include "main.h"
 
-void	split_input(char *s, t_list **head)
+void	push_radix_sort(t_stacks *stack)
 {
+	int		loop;
+	long	mask;
 	long	i;
-	char	**split;
+	long	len;
 
-	i = 0;
-	split = ft_split(s, ' ');
-	if (!split)
-		error_handler(head, NULL);
-	while (split[i])
-		if (!append_node(split[i++], head))
-			error_handler(head, split);
-	ft_split_free(split);
+	len = push_lst_size(*stack->a);
+	loop = calculate_loops(*stack->a);
+	mask = 1;
+	while (loop--)
+	{
+		i = 0;
+		while (i++ < len)
+		{
+			if (!(*(long *)((t_list *)*stack->a)->content & mask))
+				pb(stack);
+			else
+				ra(stack, TRUE);
+		}
+		while (i--)
+			pa(stack);
+		mask = mask << 1;
+	}
 }
